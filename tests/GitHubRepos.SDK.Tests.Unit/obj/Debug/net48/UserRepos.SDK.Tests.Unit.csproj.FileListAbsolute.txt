@@ -1,6 +1,0 @@
-C:\Users\kyle\source\repos\UserGitHubRepos\UserRepos.SDK.Tests\obj\Debug\net48\UserRepos.SDK.Tests.Unit.csproj.AssemblyReference.cache
-C:\Users\kyle\source\repos\UserGitHubRepos\UserRepos.SDK.Tests\obj\Debug\net48\UserRepos.SDK.Tests.Unit.csproj.SuggestedBindingRedirects.cache
-C:\Users\kyle\source\repos\UserGitHubRepos\UserRepos.SDK.Tests\obj\Debug\net48\UserRepos.SDK.Tests.Unit.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\kyle\source\repos\UserGitHubRepos\UserRepos.SDK.Tests\obj\Debug\net48\UserRepos.SDK.Tests.Unit.AssemblyInfoInputs.cache
-C:\Users\kyle\source\repos\UserGitHubRepos\UserRepos.SDK.Tests\obj\Debug\net48\UserRepos.SDK.Tests.Unit.AssemblyInfo.cs
-C:\Users\kyle\source\repos\UserGitHubRepos\UserRepos.SDK.Tests\obj\Debug\net48\UserRepos.SDK.Tests.Unit.csproj.CoreCompileInputs.cache
