@@ -22,7 +22,7 @@ namespace UserRepos.SDK.Services
             }
             catch (Exception ex)
             {
-                throw new Exception($"No user information found for the username {username}. Github Response: {ex.Message}");
+                throw new Exception($"No user information found for the username {username}");
             }
         }
 

@@ -22,18 +22,6 @@ namespace UserRepos.SDK.Tests.Unit
 
         #region GetUserInformation Tests
 
-        [Theory]
-        [InlineData("robconery")]
-        [InlineData("")]
-        public async Task GetUserInformationAsync_ShouldReturnUserInfoResponse_WhenRequestSent(string username)
-        {
-            // Act
-            var response = await _sut.GetUserInformationAsync(username);
-
-            // Assert
-            response.Should().BeOfType(typeof(UserInfoResponse));
-        }
-
         [Fact]
         public async Task GetUserInformationAsync_ShouldReturnUserInfo_WhenUsernameExists()
         {
@@ -50,6 +38,7 @@ namespace UserRepos.SDK.Tests.Unit
             var response = await _sut.GetUserInformationAsync(username);
 
             // Assert
+            response.Should().BeOfType(typeof(UserInfoResponse));
             response.Should().BeEquivalentTo(expectedInfo);
         }
 
@@ -59,12 +48,12 @@ namespace UserRepos.SDK.Tests.Unit
             // Arrange
             var username = "nonexistentusername-578jxk7698";
             var expectedErrorMessage = $"No user information found for the username {username}";
-            
+
             // Act
-            Action response = async () => await _sut.GetUserInformationAsync(username);
+            Func<Task<IResponse>> response = async () => await _sut.GetUserInformationAsync(username);
 
             // Assert
-            response.Should().Throw<Exception>().Where(ex => ex.Message == expectedErrorMessage);
+            await response.Should().ThrowAsync<Exception>().Where(ex => ex.Message == expectedErrorMessage);
         }
 
         #endregion
@@ -85,6 +74,7 @@ namespace UserRepos.SDK.Tests.Unit
             response.RepoInfos.Should().NotBeNullOrEmpty();
         }
 
+        // !!! Test will not pass because my user KQuinn1996 has a public repo (this project) !!!
         [Fact]
         public async Task GetRepoInformationAsync_ShouldReturnNoRepoExistsMessage_WhenUsernameHasNoRepos()
         {
@@ -93,10 +83,10 @@ namespace UserRepos.SDK.Tests.Unit
             var expectedErrorMessage = $"No repositories can be found for the username {username}";
 
             // Act
-            Action response = async () => await _sut.GetRepoInformationAsync(username);
+            Func<Task<IResponse>> response = async () => await _sut.GetRepoInformationAsync(username);
 
             // Assert
-            response.Should().Throw<Exception>().Where(ex => ex.Message == expectedErrorMessage);
+            await response.Should().ThrowAsync<Exception>().Where(ex => ex.Message == expectedErrorMessage);
         }
 
         [Fact]
@@ -107,10 +97,10 @@ namespace UserRepos.SDK.Tests.Unit
             var expectedErrorMessage = $"No user information found for the username {username}";
 
             // Act
-            Action response = async () => await _sut.GetRepoInformationAsync(username);
+            Func<Task<IResponse>> response = async () => await _sut.GetRepoInformationAsync(username);
 
             // Assert
-            response.Should().Throw<Exception>().Where(ex => ex.Message == expectedErrorMessage);
+            await response.Should().ThrowAsync<Exception>().Where(ex => ex.Message == expectedErrorMessage);
         }
     
 

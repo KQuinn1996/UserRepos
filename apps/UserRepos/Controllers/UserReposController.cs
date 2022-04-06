@@ -1,8 +1,4 @@
-﻿using Newtonsoft.Json;
-using System.Collections.Generic;
-using System.IO;
-using System.Net;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using UserRepos.Models;
@@ -12,7 +8,6 @@ using UserRepos.SDK.Responses;
 
 namespace UserRepos.Controllers
 {
-    [HandleError()]
     public class UserReposController : Controller
     {
         private readonly IUserRepoService _userRepoService;
@@ -28,9 +23,6 @@ namespace UserRepos.Controllers
             InitialiseViewData();
             return View();
         }
-
-        // TODO better css
-        // TODO nullable types
 
         [HttpPost]
         public async Task<ActionResult> Index(string username)
