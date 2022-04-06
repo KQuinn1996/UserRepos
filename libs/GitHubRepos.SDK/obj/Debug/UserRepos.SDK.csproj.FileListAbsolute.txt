@@ -1,0 +1,9 @@
+C:\Users\kyle\source\repos\UserGitHubRepos\UserGitHubRepos.SDK\bin\Debug\UserGitHubRepos.SDK.dll
+C:\Users\kyle\source\repos\UserGitHubRepos\UserGitHubRepos.SDK\bin\Debug\UserGitHubRepos.SDK.pdb
+C:\Users\kyle\source\repos\UserGitHubRepos\UserGitHubRepos.SDK\obj\Debug\UserRepos.SDK.csproj.AssemblyReference.cache
+C:\Users\kyle\source\repos\UserGitHubRepos\UserGitHubRepos.SDK\obj\Debug\UserRepos.SDK.csproj.CoreCompileInputs.cache
+C:\Users\kyle\source\repos\UserGitHubRepos\UserGitHubRepos.SDK\obj\Debug\UserGitHubRepos.SDK.dll
+C:\Users\kyle\source\repos\UserGitHubRepos\UserGitHubRepos.SDK\obj\Debug\UserGitHubRepos.SDK.pdb
+C:\Users\kyle\source\repos\UserGitHubRepos\UserGitHubRepos.SDK\bin\Debug\Newtonsoft.Json.dll
+C:\Users\kyle\source\repos\UserGitHubRepos\UserGitHubRepos.SDK\bin\Debug\Newtonsoft.Json.xml
+C:\Users\kyle\source\repos\UserGitHubRepos\UserGitHubRepos.SDK\obj\Debug\UserRepos.SDK.csproj.CopyComplete
