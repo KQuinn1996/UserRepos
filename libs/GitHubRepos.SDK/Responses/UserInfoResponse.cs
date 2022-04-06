@@ -2,7 +2,7 @@
 
 namespace UserRepos.SDK.Responses
 {
-    public class UserInfoResponse : ResponseBase
+    public class UserInfoResponse : IResponse
     {
         [JsonProperty("repos_url")]
         public string UserRepoUrl { get; set; }

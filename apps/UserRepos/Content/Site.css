@@ -23,18 +23,29 @@ textarea {
     max-width: 280px;
 }
 
-.a.navbar-brand.center {
+/*.a.navbar-brand.center {
     margin-left: 500px
+}*/
+
+.user-info-box {
+    height: 275px;
+    background: #CCCCCC;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.info-item {
-    max-height:300px;
-    /*background-color: red*/
+.user-info {
+    background-color: #FFFF00;
+    width: 200px;
+    height: 400px;
 }
     
 .avatar-image {
-    max-height: 200px;
-    margin-left: 20%;
+    max-height: 215px;
     padding-bottom: 10px
-    /*background-color: blue*/
+}
+
+.bold {
+    font-weight: bold
 }

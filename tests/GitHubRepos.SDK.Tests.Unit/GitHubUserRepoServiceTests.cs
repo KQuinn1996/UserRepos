@@ -1,4 +1,5 @@
 using FluentAssertions;
+using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using UserRepos.SDK.Clients;
@@ -40,8 +41,6 @@ namespace UserRepos.SDK.Tests.Unit
             var username = "robconery";
             var expectedInfo = new UserInfoResponse
             {
-                Success = true,
-                ErrorMessage = null,
                 UserRepoUrl = "https://api.github.com/users/robconery/repos",
                 AvatarImage = "https://avatars.githubusercontent.com/u/78586?v=4",
                 Location = "Honolulu, HI"
@@ -55,24 +54,17 @@ namespace UserRepos.SDK.Tests.Unit
         }
 
         [Fact]
-        public async Task GetUserInformationAsync_ShouldReturnUnsuccesfulMessage_WhenUsernameDoesNotExist()
+        public async Task GetUserInformationAsync_ShouldThrowExceptionWithError_WhenUsernameDoesNotExist()
         {
             // Arrange
             var username = "nonexistentusername-578jxk7698";
-            var expectedInfo = new UserInfoResponse
-            {
-                Success = false,
-                ErrorMessage = $"No user information found for the username {username}",
-                UserRepoUrl = null,
-                AvatarImage = null,
-                Location = null
-            };
-
+            var expectedErrorMessage = $"No user information found for the username {username}";
+            
             // Act
-            var response = await _sut.GetUserInformationAsync(username);
+            Action response = async () => await _sut.GetUserInformationAsync(username);
 
             // Assert
-            response.Should().BeEquivalentTo(expectedInfo);
+            response.Should().Throw<Exception>().Where(ex => ex.Message == expectedErrorMessage);
         }
 
         #endregion
@@ -98,19 +90,13 @@ namespace UserRepos.SDK.Tests.Unit
         {
             // Arrange
             var username = "KQuinn1996";
-            var expectedInfo = new RepoInfoResponse
-            {
-                Success = false,
-                ErrorMessage = $"No repositories can be found for the username {username}",
-                RepoInfos = null
-            };
+            var expectedErrorMessage = $"No repositories can be found for the username {username}";
 
             // Act
-            var response = await _sut.GetRepoInformationAsync(username);
+            Action response = async () => await _sut.GetRepoInformationAsync(username);
 
             // Assert
-            response.Should().BeOfType(typeof(RepoInfoResponse));
-            response.Should().BeEquivalentTo(expectedInfo);
+            response.Should().Throw<Exception>().Where(ex => ex.Message == expectedErrorMessage);
         }
 
         [Fact]
@@ -118,20 +104,15 @@ namespace UserRepos.SDK.Tests.Unit
         {
             // Arrange
             var username = "nonexistentusername-578jxk7698";
-            var expectedInfo = new RepoInfoResponse
-            {
-                Success = false,
-                ErrorMessage = $"No user information found for the username {username}",
-                RepoInfos = null
-            };
+            var expectedErrorMessage = $"No user information found for the username {username}";
 
             // Act
-            var response = await _sut.GetRepoInformationAsync(username);
+            Action response = async () => await _sut.GetRepoInformationAsync(username);
 
             // Assert
-            response.Should().BeOfType(typeof(RepoInfoResponse));
-            response.Should().BeEquivalentTo(expectedInfo);
+            response.Should().Throw<Exception>().Where(ex => ex.Message == expectedErrorMessage);
         }
+    
 
         #endregion
 

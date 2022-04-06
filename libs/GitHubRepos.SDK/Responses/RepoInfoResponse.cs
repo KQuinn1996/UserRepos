@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace UserRepos.SDK.Responses
 {
-    public class RepoInfoResponse : ResponseBase
+    public class RepoInfoResponse : IResponse
     {
         public List<RepoInfo> RepoInfos { get; set; }
     }

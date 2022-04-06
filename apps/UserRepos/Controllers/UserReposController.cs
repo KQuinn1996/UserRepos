@@ -25,26 +25,20 @@ namespace UserRepos.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            ViewData["ValidationMessage"] = "";
-            ViewData["ErrorMessage"] = "";
+            InitialiseViewData();
             return View();
         }
 
-        // TODO 
-        //  - Tests, mocking out client and service
-        // https://stackoverflow.com/questions/5021552/how-to-reference-a-css-file-on-a-razor-view
+        // TODO better css
+        // TODO nullable types
 
         [HttpPost]
         public async Task<ActionResult> Index(string username)
         {
-            ViewData["ValidationMessage"] = "";
-            ViewData["ErrorMessage"] = "";
+            InitialiseViewData();
 
-            if (string.IsNullOrEmpty(username))
-            {
-                ViewData["ValidationMessage"] = "Please enter a username";
+            if (!ValidateUsername(username))
                 return View();
-            }
 
             try
             {
@@ -61,30 +55,22 @@ namespace UserRepos.Controllers
             }
         }
 
-        //// TODO 
+        private bool ValidateUsername(string username)
+        {
+            if (string.IsNullOrEmpty(username))
+            {
+                ViewData["ValidationMessage"] = "Please enter a username";
+                return false;
+            }
 
-        //[HttpPost]
-        //public async Task<ActionResult> Index(string username)
-        //{
-        //    ViewData["ValidationMessage"] = "";
-        //    ViewData["ErrorMessage"] = "";
+            return true;
+        }
 
-        //    if (string.IsNullOrEmpty(username))
-        //    {
-        //        ViewData["ValidationMessage"] = "Please enter a username";
-        //        return View();
-        //    }
-
-        //    var userInfo = await _userRepoService.GetUserInformationAsync(username);
-        //    var repoInfo = await _userRepoService.GetTop5RepoInformationAsync(username);
-
-        //    if (repoInfo.Success)
-        //        ViewData["RepoData"] = ConvertToView(username, userInfo, repoInfo);
-        //    else
-        //        ViewData["ErrorMessage"] = repoInfo.ErrorMessage;
-
-        //    return View();
-        //}
+        private void InitialiseViewData()
+        {
+            ViewData["ValidationMessage"] = "";
+            ViewData["ErrorMessage"] = "";
+        }
 
         private UserReposViewModel ConvertToView(string username, UserInfoResponse userInfo, RepoInfoResponse repoInfo)
         {

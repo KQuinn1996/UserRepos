@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
 using UserRepos.SDK.Clients;
@@ -18,18 +18,11 @@ namespace UserRepos.SDK.Services
         {
             try
             {
-                var response = await _gitHubApiClient.GetResponseAsync<UserInfoResponse>(username);
-                response.Success = true;
-                return response;
+                return await _gitHubApiClient.GetResponseAsync<UserInfoResponse>(username);
             }
-            catch
+            catch (Exception ex)
             {
-                // TODO -> cases where response code isnt just 404
-                return new UserInfoResponse
-                {
-                    Success = false,
-                    ErrorMessage = $"No user information found for the username {username}"
-                };
+                throw new Exception($"No user information found for the username {username}. Github Response: {ex.Message}");
             }
         }
 
@@ -37,52 +30,30 @@ namespace UserRepos.SDK.Services
         {
             var userInfo = await GetUserInformationAsync(username);
 
-            if (userInfo.UserRepoUrl is null)
-            {
-                return new RepoInfoResponse
-                {
-                    Success = false,
-                    ErrorMessage = $"No user information found for the username {username}"
-                };
-            }
-
             var repoResponse = await _gitHubApiClient.GetResponseListAsync<RepoInfo>(userInfo.UserRepoUrl);
 
             if (!(repoResponse is null) && repoResponse.Any())
             {
                 return new RepoInfoResponse 
                 { 
-                    Success = true,
                     RepoInfos = repoResponse
                 };
             }
-
-            return new RepoInfoResponse
+            else
             {
-                Success = false,
-                ErrorMessage = $"No repositories can be found for the username {username}"
-            };
+                throw new Exception($"No repositories can be found for the username {username}");
+            }
         }
 
         public async Task<RepoInfoResponse> GetTop5RepoInformationAsync(string username)
         {
             var repoInfo = await GetRepoInformationAsync(username);
 
-            if (repoInfo.Success)
-            {
-                var top5 = GetTop5Repos(repoInfo);
-                repoInfo.RepoInfos = top5;
-                return repoInfo;
-            }
+            repoInfo.RepoInfos = repoInfo.RepoInfos.OrderByDescending(repo => repo.StarGazerCount)
+                .Take(5)
+                .ToList(); 
 
             return repoInfo;
-        }
-
-        private List<RepoInfo> GetTop5Repos(RepoInfoResponse repoInfo)
-        {
-            return repoInfo.RepoInfos.OrderByDescending(repo => repo.StarGazerCount)
-                .Take(5)
-                .ToList();
         }
     }
 }
