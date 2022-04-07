@@ -74,12 +74,11 @@ namespace UserRepos.SDK.Tests.Unit
             response.RepoInfos.Should().NotBeNullOrEmpty();
         }
 
-        // !!! Test will not pass because my user KQuinn1996 has a public repo (this project) !!!
         [Fact]
         public async Task GetRepoInformationAsync_ShouldReturnNoRepoExistsMessage_WhenUsernameHasNoRepos()
         {
             // Arrange
-            var username = "KQuinn1996";
+            var username = "sdasdd";
             var expectedErrorMessage = $"No repositories can be found for the username {username}";
 
             // Act
